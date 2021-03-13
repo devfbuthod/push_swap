@@ -6,9 +6,9 @@ CC=clang
 
 CFLAGS=-Wall -Wextra -Werror -g3 -fsanitize=address -I ./includes/
 
-NAME=push_swap
+NAME=checker
 
-SRCS	=	./srcs/push_swap.c			\
+SRCS	=	./srcs/checker.c			\
 			./srcs/list_functions.c		\
 			./srcs/list_functions2.c	\
 			./srcs/ft_error.c			\
@@ -18,7 +18,7 @@ SRCS	=	./srcs/push_swap.c			\
 
 LIBFT	=	./libft/libft.a
 
-HEADER	=	./includes/push_swap.h
+HEADER	=	./includes/checker.h
 
 OBJS	=	$(SRCS:.c=.o)
 

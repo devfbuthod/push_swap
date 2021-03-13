@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/push_swap.h"
+#include "./../includes/checker.h"
 
 int isEmptyList(t_list *list)
 {

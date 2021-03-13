@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/push_swap.h"
+#include "./../includes/checker.h"
 
 int ft_error(t_list *list, int code_erreur)
 {

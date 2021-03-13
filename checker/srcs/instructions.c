@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/push_swap.h"
+#include "./../includes/checker.h"
 
 t_list *rotate_rev(t_list *list)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/push_swap.h"
+#include "./../includes/checker.h"
 
 void parse_swap(t_list **lista, t_list **listb, char* buffer)
 {
@@ -84,11 +84,6 @@ int parsing(t_list **lista, t_list **listb)
             ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
         free(line);
         line = NULL;
-        printList(*lista);
-        printf("a\n---\n");
-        printList(*listb);
-        printf("b\n");
-        printf("\n\n\n");
 	}
     free(line);
     line = NULL;
