@@ -67,30 +67,18 @@ void parse_rotate(t_list **lista, t_list **listb, char* buffer)
         ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
 }
 
-int parsing(t_list **lista, t_list **listb)
+int parsing(char *cmd, t_list **lista, t_list **listb)
 {
-    char *line;
-    int ret;
-
-    while ((ret = get_next_line(0, &line)) > 0)
-	{
-        if (line[0] == 's')
-            parse_swap(lista, listb, line);
-        else if (line[0] == 'p')
-            parse_push(lista, listb, line);
-        else if (line[0] == 'r')
-            parse_rotate(lista, listb, line);
-        else
-            ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
-        free(line);
-        line = NULL;
-        printList(*lista);
-        printf("a\n---\n");
-        printList(*listb);
-        printf("b\n");
-        printf("\n\n\n");
-	}
-    free(line);
-    line = NULL;
+    if (cmd[0] == 's')
+        parse_swap(lista, listb, cmd);
+    else if (cmd[0] == 'p')
+        parse_push(lista, listb, cmd);
+    else if (cmd[0] == 'r')
+        parse_rotate(lista, listb, cmd);
+    printList(*lista);
+    printf("a\n---\n");
+    printList(*listb);
+    printf("b\n");
+    printf("\n\n\n");
     return (0);
 }

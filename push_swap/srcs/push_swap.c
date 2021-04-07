@@ -12,27 +12,17 @@
 
 #include "./../includes/push_swap.h"
 
-/*void algo(t_list **lista, t_list **listb)
+t_list sort_3(t_list **lista)
 {
-    if (*lista->data > *lista->prev->data && *lista->data < *list->next->data)
-        rotate_rev(*lista);
-}*/
+    t_list tmp = *lista;
+    
+}
 
-t_list *loop_list(t_list *lista)
+void algo(t_list **lista, t_list **listb)
 {
-    t_list *temp = NULL;
-    t_list *temp2 = lista;
-
-    while (lista)
-    {
-        lista->prev = temp;
-        temp = lista;
-        lista = lista->next;
-    }
-    lista = temp;
-    lista->next = temp2;
-    lista = lista->next;
-    return (lista);
+    if (lenList(*lista) == 3 && lenList(*listb) == 0)
+        *lista = sort_3(*lista);
+    
 }
 
 int main(int argc, char **argv)
@@ -44,12 +34,11 @@ int main(int argc, char **argv)
     lista = incr_list(lista, argv);
     if (lista == NULL)
         return (0);
-    lista = loop_list(lista);
-    //algo(&lista, &listb);
-    if (ft_verif(lista) && lenList(listb) == 0)
+    algo(&lista, &listb);
+    /*if (ft_verif(lista) && lenList(listb) == 0)
         ft_putstr("OK\n");
     else
-        ft_putstr("KO\n");
+        ft_putstr("KO\n");*/
     freeList(lista);
     freeList(listb);
     lista = NULL;

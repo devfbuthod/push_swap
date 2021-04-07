@@ -47,7 +47,7 @@ void parse_push(t_list **lista, t_list **listb, char* buffer);
 
 void parse_rotate(t_list **lista, t_list **listb, char* buffer);
 
-int parsing(t_list **lista, t_list **listb);
+int parsing(char *cmd, t_list **lista, t_list **listb);
 
 int ft_error_parser(char *argv, t_list *list);
 
