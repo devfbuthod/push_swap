@@ -53,4 +53,14 @@ int ft_error_parser(char *argv, t_list *list);
 
 t_list *free_and_ret(t_list *to_free, t_list *to_ret);
 
+void algo(t_list **lista, t_list **listb);
+
+int getBiggest(t_list *list);
+
+int getSmallest(t_list *list);
+
+int getPosFirst(t_list *la, int min, int max);
+
+int getPosSecond(t_list *la, int min, int max);
+
 #endif

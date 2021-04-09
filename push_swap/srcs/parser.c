@@ -69,6 +69,7 @@ void parse_rotate(t_list **lista, t_list **listb, char* buffer)
 
 int parsing(char *cmd, t_list **lista, t_list **listb)
 {
+    printf("%s\n", cmd);
     if (cmd[0] == 's')
         parse_swap(lista, listb, cmd);
     else if (cmd[0] == 'p')

@@ -41,6 +41,7 @@ void addAt(t_list **list, int data, int pos)
     else if (pos == 0)
     {
         cell->next = *list;
+        cell->prev = NULL;
         *list = cell;
     }
     else

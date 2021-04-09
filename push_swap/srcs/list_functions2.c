@@ -27,6 +27,38 @@ int getAt(t_list *list, int pos)
     return (list->data);
 }
 
+int getBiggest(t_list *list)
+{
+    int i;
+    int nbr;
+
+    nbr = -2147483648;
+    i = 0;
+    while (list)
+    {
+        if (nbr < list->data)
+            nbr = list->data;
+        list = list->next;
+    }
+    return (nbr);
+}
+
+int getSmallest(t_list *list)
+{
+    int i;
+    int nbr;
+
+    nbr = 2147483647;
+    i = 0;
+    while (list)
+    {
+        if (nbr > list->data)
+            nbr = list->data;
+        list = list->next;
+    }
+    return (nbr);
+}
+
 int printList(t_list *list)
 {
     int i;
@@ -48,25 +80,4 @@ t_list *free_and_ret(t_list *to_free, t_list *to_ret)
     if (to_free)
         freeList(to_free);
     return (to_ret);
-}
-
-int ft_verif(t_list *list)
-{
-    int prev;
-
-    if (list->data < 0)
-        prev = -2147483648;
-    else
-        prev = 0;
-    while (list)
-    {
-        if (list->data >= prev)
-        {
-            prev = list->data;
-            list = list->next;
-        }
-        else
-            return (0);
-    }
-    return (1);
 }
