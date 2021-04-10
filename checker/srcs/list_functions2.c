@@ -54,6 +54,8 @@ int ft_verif(t_list *list)
 {
     int prev;
 
+    if (lenList(list) == 0)
+        return (0);
     if (list->data < 0)
         prev = -2147483648;
     else

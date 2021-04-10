@@ -63,4 +63,6 @@ int getPosFirst(t_list *la, int min, int max);
 
 int getPosSecond(t_list *la, int min, int max);
 
+int getPos(t_list *la, int value);
+
 #endif

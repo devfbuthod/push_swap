@@ -16,6 +16,8 @@ int ft_verif(t_list *list)
 {
     int prev;
 
+    if (lenList(list) == 0)
+        return (0);
     if (list->data < 0)
         prev = -2147483648;
     else
@@ -37,7 +39,8 @@ int getPosFirst(t_list *la, int min, int max)
 {
     int i;
 
-    i = 1;
+    i = 0;
+    //printf("min : %d et max : %d\n", min, max);
     while (la)
     {
         if (la->data >= min && la->data <= max)
@@ -52,31 +55,32 @@ int getPosSecond(t_list *la, int min, int max)
 {
     int i;
     int temp;
-
-    t_list *listTemp = la;
-    t_list *listTemp2 = NULL;
-    i = 1;
-    while (listTemp)
+    
+    i = 0;
+    temp = 0;
+    while (la)
     {
-        temp = listTemp->data;
-        listTemp2 = listTemp;
-        listTemp = listTemp->next;
-        if (listTemp)
-            listTemp->prev = listTemp2;
-        if (listTemp == NULL)
-        {
-            listTemp = listTemp2;
-            break ;
-        }
-    }
-    while (listTemp2->prev)
-    {
-        if (listTemp2->data >= min && listTemp2->data <= max)
-            return (i);
-        listTemp2 = listTemp2->prev;
+        if (la->data >= min && la->data <= max)
+            temp = i;
+        la = la->next;
         i++;
     }
+    if (temp != 0)
+        return (100 - temp);
     return (-1);
+}
+
+int getPos(t_list *la, int value)
+{
+    int i;
+    
+    i = 0;
+    while (!(value < getAt(la, lenList(la) - 1) && value > getAt(la, 0)) && la)
+    {
+        i++;
+        la = la->next;
+    }
+    return (i);
 }
 
 /*int getPosSecond(*la)
