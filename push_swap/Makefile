@@ -16,6 +16,8 @@ SRCS	=	./srcs/push_swap.c			\
 			./srcs/parser.c				\
 			./srcs/algo.c				\
 			./srcs/list_functions3.c	\
+			./srcs/list_functions4.c	\
+			./srcs/list_functions5.c	\
 
 LIBFT	=	./libft/libft.a
 

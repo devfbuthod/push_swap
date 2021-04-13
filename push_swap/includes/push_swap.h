@@ -65,4 +65,20 @@ int getPosSecond(t_list *la, int min, int max);
 
 int getPos(t_list *la, int value);
 
+long long median_finding(t_list *la);
+
+void isBiggest(t_list **la, t_list **lb);
+
+void isSmallest(t_list **la, t_list **lb);
+
+void isBetween(t_list **la, t_list **lb);
+
+void sortListb(t_list **la, t_list **lb);
+
+void push_lista(t_list **la, t_list **lb);
+
+int sortLista(t_list **la, t_list **lb, int i, int max);
+
+void push_listb(t_list **la, t_list **lb, int max);
+
 #endif

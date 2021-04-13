@@ -76,14 +76,5 @@ int parsing(char *cmd, t_list **lista, t_list **listb)
         parse_push(lista, listb, cmd);
     else if (cmd[0] == 'r')
         parse_rotate(lista, listb, cmd);
-    /*printList(*lista);
-    printf("a\n---\n");
-    printList(*listb);
-    printf("b\n");
-    printf("\n\n\n");*/
-
-    /*printf("0 : %d\n", getAt(*lista, 0));
-    printf("1 : %d\n", getAt(*lista, 1));
-    printf("fin : %d\n", getAt(*lista, lenList(*lista) - 1));*/
     return (0);
 }

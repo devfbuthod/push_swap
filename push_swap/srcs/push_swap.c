@@ -22,6 +22,7 @@ int main(int argc, char **argv)
     if (lista == NULL)
         return (0);
     algo(&lista, &listb);
+    //printf("biggest : %d, smallest : %d, median : %lld\n", getBiggest(lista), getSmallest(lista), median_finding(lista) / 4);
     freeList(lista);
     freeList(listb);
     lista = NULL;

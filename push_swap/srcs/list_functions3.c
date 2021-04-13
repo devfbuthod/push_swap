@@ -40,7 +40,6 @@ int getPosFirst(t_list *la, int min, int max)
     int i;
 
     i = 0;
-    //printf("min : %d et max : %d\n", min, max);
     while (la)
     {
         if (la->data >= min && la->data <= max)
@@ -83,7 +82,15 @@ int getPos(t_list *la, int value)
     return (i);
 }
 
-/*int getPosSecond(*la)
+long long median_finding(t_list *la)
 {
+    long long res;
 
-}*/
+    if (getSmallest(la) < 0 && getBiggest(la) < 0)
+        res = ((long long)(getSmallest(la) * -1) - (long long)(getBiggest(la)) * -1);
+    else if (getSmallest(la) < 0)
+        res =  (long long)(-getSmallest(la)) + (long long)getBiggest(la);
+    else
+        res = (long long)getBiggest(la) - (long long)getSmallest(la);
+    return (res);
+}

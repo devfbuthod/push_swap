@@ -1,76 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_functions2.c                                  :+:      :+:    :+:   */
+/*   list_functions5.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fbuthod- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/05 11:39:28 by fbuthod-          #+#    #+#             */
-/*   Updated: 2021/03/05 11:39:30 by fbuthod-         ###   ########lyon.fr   */
+/*   Created: 2021/04/13 12:10:11 by fbuthod-          #+#    #+#             */
+/*   Updated: 2021/04/13 12:10:13 by fbuthod-         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../includes/checker.h"
+#include "push_swap.h"
 
-int getAt(t_list *list, int pos)
+void push_listb(t_list **la, t_list **lb, int max)
 {
+    int ret;
     int i;
 
-    i = 0;
-    if (isEmptyList(list))
-        return (-1);
-    while (i < pos)
+    i = 1;
+    ret = 0;
+    while (lenList(*la) != 0)
     {
-        list = list->next;
-        i++;
-    }
-    return (list->data);
-}
-
-int printList(t_list *list)
-{
-    int i;
-
-    i = 0;
-    if (isEmptyList(list))
-        return (-1);
-    while (list)
-    {
-        ft_printf("%d \n", (int)(list->data));
-        list = list->next;
-        i++;
-    }
-    return (0);
-}
-
-t_list *free_and_ret(t_list *to_free, t_list *to_ret)
-{
-    if (to_free)
-        freeList(to_free);
-    return (to_ret);
-}
-
-int ft_verif(t_list *list)
-{
-    int prev;
-
-    if (lenList(list) == 0)
-        return (0);
-    if (list->data < 0)
-        prev = -2147483648;
-    else
-        prev = 0;
-    while (list)
-    {
-        if (list->data >= prev)
+        while (ret == 0)
         {
-            prev = list->data;
-            list = list->next;
+            ret = sortLista(la, lb, i, max);
+            if (lenList(*lb) > 1)
+                sortListb(la, lb);
+            parsing("pb", la, lb);
         }
-        else
-            return (0);
+        ret = 0;
+        i++;
     }
-    return (1);
 }
 
 void push_lista(t_list **la, t_list **lb)
