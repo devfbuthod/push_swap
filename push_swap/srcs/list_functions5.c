@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void push_listb(t_list **la, t_list **lb, int max)
+/*void push_listb(t_list **la, t_list **lb, int max)
 {
     int ret;
     int i;
@@ -31,7 +31,7 @@ void push_listb(t_list **la, t_list **lb, int max)
         ret = 0;
         i++;
     }
-}
+}*/
 
 void push_lista(t_list **la, t_list **lb)
 {

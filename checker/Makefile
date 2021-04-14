@@ -51,4 +51,10 @@ fclean:         clean
 
 re:             fclean all
 
-.PHONY: all bonus clean fclean re lib
+.PHONY: all bonus clean fclean re lib 
+
+.PHONY: leaks
+leaks: CC = $(HOME)/.brew/opt/llvm/bin/clang
+leaks: CFLAGS += -mlinker-version=450 -fsanitize=address -g
+leaks: fclean $(NAME)
+         ASAN_OPTIONS=detect_leaks=1 ./$(NAME)

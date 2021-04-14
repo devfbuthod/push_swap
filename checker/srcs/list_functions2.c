@@ -72,20 +72,3 @@ int ft_verif(t_list *list)
     }
     return (1);
 }
-
-void push_lista(t_list **la, t_list **lb)
-{
-    int pos_first;
-    int pos_second;
-
-    pos_first = getPos(*lb, getSmallest(*lb));
-    pos_second = lenList(*lb) - pos_first;
-    if (pos_first >= pos_second && pos_first != 0)
-        while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb))
-            parsing("rrb", la, lb);
-    else
-        while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb))
-            parsing("rb", la, lb);
-    while (*lb)
-        parsing("pa", la, lb);
-}

@@ -65,16 +65,6 @@ void	sort_5(t_list **la, t_list **lb)
 
 void	sort_100(t_list **la, t_list **lb)
 {
-    int max;
-
-    max = getBiggest(*la) / 5;
-    push_listb(la, lb, max);
-    push_lista(la, lb);
-    
-}
-
-void	sort_500(t_list **la, t_list **lb)
-{
     int quart;
     int min;
     int max;
@@ -84,9 +74,9 @@ void	sort_500(t_list **la, t_list **lb)
 
     min = getSmallest(*la);
     quart = median_finding(*la) / 4;
-    max = quart;
+    max = min + quart;
     i = 1;
-    while (i <= 3)
+    while (i <= 4)
     {
         while (getPosFirst(*la, min, max) != -1)
         {
@@ -99,6 +89,46 @@ void	sort_500(t_list **la, t_list **lb)
         i++;
         max += quart;
         if (i == 4)
+            max = getBiggest(*la);
+        min += quart;
+        push_lista(la, lb);
+    }
+    pos_first = getPos(*la, getSmallest(*la));
+    pos_second = lenList(*la) - pos_first;
+    if (pos_first >= pos_second && pos_first != 0)
+        while (getAt(*la, 0) != getSmallest(*la))
+            parsing("ra", la, lb);
+    else
+        while (getAt(*la, 0) != getSmallest(*la))
+            parsing("rra", la, lb);
+}
+
+void	sort_500(t_list **la, t_list **lb)
+{
+    int quart;
+    int min;
+    int max;
+    int i;
+    int pos_first;
+    int pos_second;
+
+    min = getSmallest(*la);
+    quart = median_finding(*la) / 8;
+    max = min + quart;
+    i = 1;
+    while (i <= 8)
+    {
+        while (getPosFirst(*la, min, max) != -1)
+        {
+            while (getAt(*la, 0) != getAt(*la, getPosFirst(*la, min, max)))
+                parsing("rra", la, lb);
+            if (lenList(*lb) > 1)
+                sortListb(la, lb);
+            parsing("pb", la, lb);
+        }
+        i++;
+        max += quart;
+        if (i == 8)
             max = getBiggest(*la);
         min += quart;
         push_lista(la, lb);
