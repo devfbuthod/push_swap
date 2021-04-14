@@ -12,80 +12,85 @@
 
 #include "./../includes/checker.h"
 
-void parse_swap(t_list **lista, t_list **listb, char* buffer)
+void	parse_swap(t_list **lista, t_list **listb, char *buffer)
 {
-    if (ft_strcmp(buffer, "sa") == 0 && lenList(*lista) != 0)
-        *lista = swap(*lista);
-    else if (ft_strcmp(buffer, "sb") == 0 && lenList(*listb) != 0)
-        *listb = swap(*listb);
-    else if (ft_strcmp(buffer, "ss") == 0)
-    {
-        if (lenList(*lista) != 0)
-            *lista = swap(*lista);
-        if (lenList(*listb) != 0)
-            *listb = swap(*listb);
-    }
-    else
-       ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
-}
-
-void parse_push(t_list **lista, t_list **listb, char* buffer)
-{
-    if (ft_strcmp(buffer, "pa") == 0)
-        *lista = push(&*listb, *lista);
-    else if (ft_strcmp(buffer, "pb") == 0)
-        *listb = push(&*lista, *listb);
-    else
-       ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
-}
-
-void parse_rotate(t_list **lista, t_list **listb, char* buffer)
-{
-    if (ft_strcmp(buffer, "ra") == 0 && lenList(*lista) != 0)
-        *lista = rotate_up(*lista);
-    else if (ft_strcmp(buffer, "rb") == 0 && lenList(*listb) != 0)
-        *listb = rotate_up(*listb);
-    else if (ft_strcmp(buffer, "rra") == 0 && lenList(*lista) != 0)
-        *lista = rotate_rev(*lista);
-    else if (ft_strcmp(buffer, "rrb") == 0 && lenList(*listb) != 0)
-        *listb = rotate_rev(*listb);
-    else if (ft_strcmp(buffer, "rr") == 0)
-    {
-        if (lenList(*lista) != 0)
-            *lista = rotate_up(*lista);
-        if (lenList(*listb) != 0)
-            *listb = rotate_up(*listb);
-    }
-    else if (ft_strcmp(buffer, "rrr") == 0)
-    {
-        if (lenList(*lista) != 0)
-            *lista = rotate_rev(*lista);
-        if (lenList(*listb) != 0)
-            *listb = rotate_rev(*listb);
-    }
-    else
-        ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
-}
-
-int parsing(t_list **lista, t_list **listb)
-{
-    char *line;
-    int ret;
-
-    while ((ret = get_next_line(0, &line)) > 0)
+	if (ft_strcmp(buffer, "sa") == 0 && testLen(lista) == 0)
+		*lista = swap(*lista);
+	else if (ft_strcmp(buffer, "sb") == 0 && testLen(listb) == 0)
+		*listb = swap(*listb);
+	else if (ft_strcmp(buffer, "ss") == 0)
 	{
-        if (line[0] == 's')
-            parse_swap(lista, listb, line);
-        else if (line[0] == 'p')
-            parse_push(lista, listb, line);
-        else if (line[0] == 'r')
-            parse_rotate(lista, listb, line);
-        else
-            ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
-        free(line);
-        line = NULL;
+		if (testLen(lista) == 0)
+			*lista = swap(*lista);
+		if (testLen(listb) == 0)
+			*listb = swap(*listb);
 	}
-    free(line);
-    line = NULL;
-    return (0);
+	else
+		ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
+}
+
+void	parse_push(t_list **lista, t_list **listb, char *buffer)
+{
+	if (ft_strcmp(buffer, "pa") == 0)
+		*lista = push(&*listb, *lista);
+	else if (ft_strcmp(buffer, "pb") == 0)
+		*listb = push(&*lista, *listb);
+	else
+		ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
+}
+
+void	parse_rotate(t_list **lista, t_list **listb, char *buffer)
+{
+	if (ft_strcmp(buffer, "ra") == 0 && testLen(lista) == 0)
+		*lista = rotate_up(*lista);
+	else if (ft_strcmp(buffer, "rb") == 0 && testLen(listb) == 0)
+		*listb = rotate_up(*listb);
+	else if (ft_strcmp(buffer, "rra") == 0 && testLen(lista) == 0)
+		*lista = rotate_rev(*lista);
+	else if (ft_strcmp(buffer, "rrb") == 0 && testLen(listb) == 0)
+		*listb = rotate_rev(*listb);
+	else if (ft_strcmp(buffer, "rr") == 0)
+	{
+		if (testLen(lista) == 0)
+			*lista = rotate_up(*lista);
+		if (testLen(listb) == 0)
+			*listb = rotate_up(*listb);
+	}
+	else if (ft_strcmp(buffer, "rrr") == 0)
+	{
+		if (testLen(lista) == 0)
+			*lista = rotate_rev(*lista);
+		if (testLen(listb) == 0)
+			*listb = rotate_rev(*listb);
+	}
+	else
+		ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
+}
+
+int	parsing(t_list **lista, t_list **listb)
+{
+	char	*line;
+	int		ret;
+
+	ret = get_next_line(0, &line);
+	while (ret > 0)
+	{
+		ret = get_next_line(0, &line);
+		if (line[0] == 's')
+			parse_swap(lista, listb, line);
+		else if (line[0] == 'p')
+			parse_push(lista, listb, line);
+		else if (line[0] == 'r')
+			parse_rotate(lista, listb, line);
+		else
+		{
+			ft_putstr("Instruction don’t exist and/or ");
+			ft_putstr("is incorrectly formatted\n");
+		}
+		free(line);
+		line = NULL;
+	}
+	free(line);
+	line = NULL;
+	return (0);
 }

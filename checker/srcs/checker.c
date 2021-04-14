@@ -12,23 +12,25 @@
 
 #include "./../includes/checker.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    argc = 0;
-    
-    t_list *lista = NULL;
-    t_list *listb = NULL;
-    lista = incr_list(lista, argv);
-    if (lista == NULL)
-        return (0);
-    parsing(&lista, &listb);
-    if (ft_verif(lista) && lenList(listb) == 0)
-        ft_putstr("OK\n");
-    else
-        ft_putstr("KO\n");
-    freeList(lista);
-    freeList(listb);
-    lista = NULL;
-    listb = NULL;
-    return (0);
+	t_list	*lista;
+	t_list	*listb;
+
+	(void)argc;
+	lista = NULL;
+	listb = NULL;
+	lista = incr_list(lista, argv);
+	if (lista == NULL)
+		return (0);
+	parsing(&lista, &listb);
+	if (ft_verif(lista) && lenList(listb) == 0)
+		ft_putstr("OK\n");
+	else
+		ft_putstr("KO\n");
+	freeList(lista);
+	freeList(listb);
+	lista = NULL;
+	listb = NULL;
+	return (0);
 }

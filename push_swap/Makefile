@@ -4,7 +4,7 @@
 
 CC=clang
 
-CFLAGS=-Wall -Wextra -Werror -g3 -fsanitize=address -I ./includes/
+CFLAGS=-Wall -Wextra -Werror -I ./includes/
 
 NAME=push_swap
 

@@ -12,63 +12,72 @@
 
 #include "./../includes/checker.h"
 
-int getAt(t_list *list, int pos)
+int	getAt(t_list *list, int pos)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (isEmptyList(list))
-        return (-1);
-    while (i < pos)
-    {
-        list = list->next;
-        i++;
-    }
-    return (list->data);
+	i = 0;
+	if (isEmptyList(list))
+		return (-1);
+	while (i < pos)
+	{
+		list = list->next;
+		i++;
+	}
+	return (list->data);
 }
 
-int printList(t_list *list)
+int	printList(t_list *list)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (isEmptyList(list))
-        return (-1);
-    while (list)
-    {
-        ft_printf("%d \n", (int)(list->data));
-        list = list->next;
-        i++;
-    }
-    return (0);
+	i = 0;
+	if (isEmptyList(list))
+		return (-1);
+	while (list)
+	{
+		ft_printf("%d \n", (int)(list->data));
+		list = list->next;
+		i++;
+	}
+	return (0);
 }
 
-t_list *free_and_ret(t_list *to_free, t_list *to_ret)
+t_list	*free_and_ret(t_list *to_free, t_list *to_ret)
 {
-    if (to_free)
-        freeList(to_free);
-    return (to_ret);
+	if (to_free)
+		freeList(to_free);
+	return (to_ret);
 }
 
-int ft_verif(t_list *list)
+int	ft_verif(t_list *list)
 {
-    int prev;
+	int	prev;
 
-    if (lenList(list) == 0)
-        return (0);
-    if (list->data < 0)
-        prev = -2147483648;
-    else
-        prev = 0;
-    while (list)
-    {
-        if (list->data >= prev)
-        {
-            prev = list->data;
-            list = list->next;
-        }
-        else
-            return (0);
-    }
-    return (1);
+	if (lenList(list) == 0)
+		return (0);
+	if (list->data < 0)
+		prev = -2147483648;
+	else
+		prev = 0;
+	while (list)
+	{
+		if (list->data >= prev)
+		{
+			prev = list->data;
+			list = list->next;
+		}
+		else
+			return (0);
+	}
+	return (1);
+}
+
+int	testLen(t_list **list)
+{
+	if (lenList(*list) == 0)
+		return (1);
+	else if (lenList(*list) == 1)
+		return (1);
+	return (0);
 }

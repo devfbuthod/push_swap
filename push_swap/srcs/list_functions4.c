@@ -12,85 +12,74 @@
 
 #include "push_swap.h"
 
-void isBiggest(t_list **la, t_list **lb)
+void	isBiggest(t_list **la, t_list **lb)
 {
-    int pos_first;
-    int pos_second;
+	int	pos_first;
+	int	pos_second;
 
-    pos_first = getPos(*lb, getBiggest(*lb));
-    pos_second = lenList(*lb) - pos_first;
-    if (pos_first >= pos_second && pos_first != 0)
-        while (getAt(*lb, 0) != getBiggest(*lb))
-            parsing("rrb", la, lb);
-    else
-        while (getAt(*lb, 0) != getBiggest(*lb))
-            parsing("rb", la, lb);
+	pos_first = getPos(*lb, getBiggest(*lb));
+	pos_second = lenList(*lb) - pos_first;
+	if (pos_first >= pos_second && pos_first != 0)
+		while (getAt(*lb, 0) != getBiggest(*lb))
+			parsing("rrb", la, lb);
+	else
+		while (getAt(*lb, 0) != getBiggest(*lb))
+			parsing("rb", la, lb);
 }
 
-void isSmallest(t_list **la, t_list **lb)
+void	isSmallest(t_list **la, t_list **lb)
 {
-    int pos_first;
-    int pos_second;
+	int	pos_first;
+	int	pos_second;
 
-    pos_first = getPos(*lb, getSmallest(*lb));
-    pos_second = lenList(*lb) - pos_first;
-    if (pos_first >= pos_second && pos_first != 0)
-        while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb))
-            parsing("rrb", la, lb);
-    else
-        while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb))
-            parsing("rb", la, lb);
+	pos_first = getPos(*lb, getSmallest(*lb));
+	pos_second = lenList(*lb) - pos_first;
+	if (pos_first >= pos_second && pos_first != 0)
+		while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb))
+			parsing("rrb", la, lb);
+	else
+		while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb))
+			parsing("rb", la, lb);
 }
 
-void isBetween(t_list **la, t_list **lb)
+void	isBetween(t_list **la, t_list **lb)
 {
-    int pos_first;
-    int pos_second;
+	int	pos_first;
+	int	pos_second;
 
-    pos_first = getPos(*lb, getAt(*la, 0));
-    pos_second = lenList(*lb) - pos_first;
-    if (pos_first >= pos_second && pos_first != 0)
-        while (!(getAt(*la, 0) < getAt(*lb, lenList(*lb) - 1) && getAt(*la, 0) > getAt(*lb, 0)))
-            parsing("rrb", la, lb);
-    else if (pos_first < pos_second && pos_second != 0)
-        while (!(getAt(*la, 0) < getAt(*lb, lenList(*lb) - 1) && getAt(*la, 0) > getAt(*lb, 0)))
-            parsing("rb", la, lb);
+	pos_first = getPos(*lb, getAt(*la, 0));
+	pos_second = lenList(*lb) - pos_first;
+	if (pos_first >= pos_second && pos_first != 0)
+		while (!(getAt(*la, 0) < getAt(*lb, lenList(*lb) - 1)
+				&& getAt(*la, 0) > getAt(*lb, 0)))
+			parsing("rrb", la, lb);
+	else if (pos_first < pos_second && pos_second != 0)
+		while (!(getAt(*la, 0) < getAt(*lb, lenList(*lb) - 1)
+				&& getAt(*la, 0) > getAt(*lb, 0)))
+			parsing("rb", la, lb);
 }
 
-void sortListb(t_list **la, t_list **lb)
+void	sortListb(t_list **la, t_list **lb)
 {
-    if (getBiggest(*lb) < getAt(*la, 0))
-        isBiggest(la, lb);
-    else if (getSmallest(*lb) > getAt(*la, 0))
-        isSmallest(la, lb);
-    else
-        isBetween(la, lb);
+	if (getBiggest(*lb) < getAt(*la, 0))
+		isBiggest(la, lb);
+	else if (getSmallest(*lb) > getAt(*la, 0))
+		isSmallest(la, lb);
+	else
+		isBetween(la, lb);
 }
 
-int sortLista(t_list **la, t_list **lb, int i, int max)
+void	sortLista(t_list **la, t_list **lb)
 {
-    int pos_first;
-    int pos_second;
+	int	pos_first;
+	int	pos_second;
 
-    pos_first = getPosFirst(*la, 0, max * i);
-    if (pos_first == -1)
-        return (-1);
-    pos_second = getPosSecond(*la, 0, max * i);
-    if (pos_first <= pos_second && pos_first != 0)
-    {
-        while (pos_first > 0)
-        {
-            parsing("ra", la, lb);
-            pos_first--;
-        }
-    }
-    else if (pos_first > pos_second && pos_second != 0)
-    {
-        while (pos_second > 0)
-        {
-            parsing("rra", la, lb);
-            pos_second--;
-        }
-    }
-    return (0);
+	pos_first = getPos(*la, getSmallest(*la));
+	pos_second = lenList(*la) - pos_first;
+	if (pos_first >= pos_second && pos_first != 0)
+		while (getAt(*la, 0) != getSmallest(*la))
+			parsing("ra", la, lb);
+	else
+		while (getAt(*la, 0) != getSmallest(*la))
+			parsing("rra", la, lb);
 }

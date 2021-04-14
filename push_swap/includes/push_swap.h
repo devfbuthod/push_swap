@@ -77,8 +77,10 @@ void sortListb(t_list **la, t_list **lb);
 
 void push_lista(t_list **la, t_list **lb);
 
-int sortLista(t_list **la, t_list **lb, int i, int max);
-
 void push_listb(t_list **la, t_list **lb, int max);
+
+void sortLista(t_list **la, t_list **lb);
+
+void	sort(t_list **la, t_list **listb);
 
 #endif

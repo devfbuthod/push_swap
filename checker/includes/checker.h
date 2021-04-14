@@ -53,4 +53,6 @@ int ft_error_parser(char *argv, t_list *list);
 
 t_list *free_and_ret(t_list *to_free, t_list *to_ret);
 
+int testLen(t_list **list);
+
 #endif

@@ -12,19 +12,26 @@
 
 #include "./../includes/push_swap.h"
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-    argc = 0;
-    
-    t_list *lista = NULL;
-    t_list *listb = NULL;
-    lista = incr_list(lista, argv);
-    if (lista == NULL)
-        return (0);
-    algo(&lista, &listb);
-    freeList(lista);
-    freeList(listb);
-    lista = NULL;
-    listb = NULL;
-    return (0);
+	t_list	*lista;
+	t_list	*listb;
+
+	(void)argc;
+	lista = NULL;
+	lista = incr_list(lista, argv);
+	listb = NULL;
+	if (lista == NULL)
+		return (0);
+	else if (lenList(lista) == 1)
+	{
+		printf("OK\n");
+		return (0);
+	}
+	algo(&lista, &listb);
+	freeList(lista);
+	freeList(listb);
+	lista = NULL;
+	listb = NULL;
+	return (0);
 }

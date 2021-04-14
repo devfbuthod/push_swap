@@ -12,71 +12,67 @@
 
 #include "./../includes/checker.h"
 
-int isEmptyList(t_list *list)
+int	isEmptyList(t_list *list)
 {
-    return list == NULL;
+	return (list == NULL);
 }
 
-t_list *createCell(int data)
+t_list	*createCell(int data)
 {
-    t_list *cell = malloc(sizeof(t_list));
-    if (!cell)
-        return (NULL);
-    cell->data = data;
-    cell->next = NULL;
+	t_list	*cell;
 
-    return (cell);
+	cell = malloc(sizeof(t_list));
+	if (!cell)
+		return (NULL);
+	cell->data = data;
+	cell->next = NULL;
+	return (cell);
 }
 
-void addAt(t_list **list, int data, int pos)
+void	addAtFollow(t_list **cell, t_list **list)
 {
-    t_list *prec = *list;
-    t_list *cur = *list;
-    int i;
-
-    i = 0;
-    t_list *cell = createCell(data);
-    if (isEmptyList(*list))
-        *list = cell;
-    else if (pos == 0)
-    {
-        cell->next = *list;
-        *list = cell;
-    }
-    else
-    {
-        while (i < pos)
-        {
-            i++;
-            prec = cur;
-            cur = cur->next;
-        }
-        prec->next = cell;
-        cell->next = cur;
-    }
+	(*cell)->next = *list;
+	(*cell)->prev = NULL;
+	*list = *cell;
 }
 
-t_list *freeList(t_list *list)
+void	addAt(t_list **list, int data, int pos)
 {
-    t_list *tmp = NULL;
-    while (list)
-    {
-        tmp = list->next;
-        free(list);
-        list = tmp;
-    }
-    return (list);
+	t_list	*prec;
+	t_list	*cur;
+	t_list	*cell;
+	int		i;
+
+	prec = *list;
+	cur = *list;
+	i = 0;
+	cell = createCell(data);
+	if (isEmptyList(*list))
+		*list = cell;
+	else if (pos == 0)
+		addAtFollow(&cell, list);
+	else
+	{
+		while (i++ < pos)
+		{
+			prec = cur;
+			cur = cur->next;
+		}
+		prec->next = cell;
+		cell->next = cur;
+	}
 }
 
-int lenList(t_list *list)
+t_list	*freeList(t_list *list)
 {
-    int i;
+	t_list	*tmp;
 
-    i = 0;
-    while (list)
-    {
-        i++;
-        list = list->next;
-    }
-    return (i);
+	tmp = NULL;
+	while (list)
+	{
+		tmp = list->next;
+		free(list);
+		list = tmp;
+	}
+	return (list);
 }

@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   btree_apply_prefix.c                               :+:      :+:    :+:   */
+/*   list_functions3.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbaud <gbaud@student.42lyon.fr>            +#+  +:+       +#+        */
+/*   By: fbuthod- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/30 07:34:38 by gbaud             #+#    #+#             */
-/*   Updated: 2020/06/01 08:45:26 by gbaud            ###   ########.fr       */
+/*   Created: 2021/04/14 14:22:59 by fbuthod-          #+#    #+#             */
+/*   Updated: 2021/04/14 14:23:01 by fbuthod-         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "./../includes/checker.h"
 
-void	btree_apply_prefix(t_btree *root, void (*applyf)(void *))
+int	lenList(t_list *list)
 {
-	applyf(root->item);
-	if (root->left)
-		btree_apply_prefix(root->left, applyf);
-	if (root->right)
-		btree_apply_prefix(root->right, applyf);
+	int	i;
+
+	i = 0;
+	while (list)
+	{
+		i++;
+		list = list->next;
+	}
+	return (i);
 }
