@@ -20,10 +20,12 @@ void	push_lista(t_list **la, t_list **lb)
 	pos_first = getPos(*lb, getSmallest(*lb));
 	pos_second = lenList(*lb) - pos_first;
 	if (pos_first >= pos_second && pos_first != 0)
-		while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb))
+		while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb)
+			&& lenList(*lb) > 1)
 			parsing("rrb", la, lb);
 	else
-		while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb))
+		while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb)
+			&& lenList(*lb) > 1)
 			parsing("rb", la, lb);
 	while (*lb)
 		parsing("pa", la, lb);
@@ -35,15 +37,24 @@ void	sort(t_list **la, t_list **listb)
 		parsing("ra", la, listb);
 }
 
-int	lenList(t_list *list)
+long long	median_finding(t_list *la)
 {
-	int	i;
+	long long	res;
 
-	i = 0;
-	while (list)
-	{
-		i++;
-		list = list->next;
-	}
-	return (i);
+	if (getSmallest(la) < 0 && getBiggest(la) < 0)
+		res = (-(long long)(getSmallest(la)) - -(long long)(getBiggest(la)));
+	else if (getSmallest(la) < 0)
+		res = -(long long)(getSmallest(la)) + (long long)getBiggest(la);
+	else
+		res = (long long)getBiggest(la) - (long long)getSmallest(la);
+	return (res);
+}
+
+void	rotate_pushb(t_list **la, t_list **lb, int min, int max)
+{
+	while (getAt(*la, 0) != getAt(*la, getPosFirst(*la, min, max)))
+		parsing("rra", la, lb);
+	if (lenList(*lb) > 1)
+		sortListb(la, lb);
+	parsing("pb", la, lb);
 }

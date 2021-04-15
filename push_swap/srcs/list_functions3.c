@@ -82,15 +82,15 @@ int	getPos(t_list *la, int value)
 	return (i);
 }
 
-long long	median_finding(t_list *la)
+int	lenList(t_list *list)
 {
-	long long	res;
+	int	i;
 
-	if (getSmallest(la) < 0 && getBiggest(la) < 0)
-		res = (-(long long)(getSmallest(la)) - -(long long)(getBiggest(la)));
-	else if (getSmallest(la) < 0)
-		res = -(long long)(getSmallest(la)) + (long long)getBiggest(la);
-	else
-		res = (long long)getBiggest(la) - (long long)getSmallest(la);
-	return (res);
+	i = 0;
+	while (list)
+	{
+		i++;
+		list = list->next;
+	}
+	return (i);
 }

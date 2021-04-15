@@ -14,7 +14,7 @@ SRCS	=	./srcs/checker.c			\
 			./srcs/ft_error.c			\
 			./srcs/instructions.c		\
 			./srcs/parser.c				\
-			./srcs/list_functions3.c
+			./srcs/list_functions3.c	
 
 
 LIBFT	=	./libft/libft.a
@@ -53,9 +53,3 @@ fclean:         clean
 re:             fclean all
 
 .PHONY: all bonus clean fclean re lib 
-
-.PHONY: leaks
-leaks: CC = $(HOME)/.brew/opt/llvm/bin/clang
-leaks: CFLAGS += -mlinker-version=450 -fsanitize=address -g
-leaks: fclean $(NAME)
-         ASAN_OPTIONS=detect_leaks=1 ./$(NAME)

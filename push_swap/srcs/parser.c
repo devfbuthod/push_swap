@@ -26,7 +26,7 @@ void	parse_swap(t_list **lista, t_list **listb, char *buffer)
 			*listb = swap(*listb);
 	}
 	else
-		ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
+		printf("Instruction don’t exist and/or is incorrectly formatted\n");
 }
 
 void	parse_push(t_list **lista, t_list **listb, char *buffer)
@@ -36,7 +36,7 @@ void	parse_push(t_list **lista, t_list **listb, char *buffer)
 	else if (ft_strcmp(buffer, "pb") == 0)
 		*listb = push(&*lista, *listb);
 	else
-		ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
+		printf("Instruction don’t exist and/or is incorrectly formatted\n");
 }
 
 void	parse_rotate(t_list **lista, t_list **listb, char *buffer)
@@ -64,7 +64,7 @@ void	parse_rotate(t_list **lista, t_list **listb, char *buffer)
 			*listb = rotate_rev(*listb);
 	}
 	else
-		ft_putstr("Instruction don’t exist and/or is incorrectly formatted\n");
+		printf("Instruction don’t exist and/or is incorrectly formatted\n");
 }
 
 int	parsing(char *cmd, t_list **lista, t_list **listb)

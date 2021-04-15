@@ -65,14 +65,14 @@ void	sort_5(t_list **la, t_list **lb)
 
 void	sort_100(t_list **la, t_list **lb)
 {
-	int	quart;
+	int	middle;
 	int	min;
 	int	max;
 	int	i;
 
 	min = getSmallest(*la);
-	quart = median_finding(*la) / 2;
-	max = min + quart;
+	middle = median_finding(*la) / 2;
+	max = min + middle;
 	i = 1;
 	while (i <= 2)
 	{
@@ -85,8 +85,8 @@ void	sort_100(t_list **la, t_list **lb)
 			parsing("pb", la, lb);
 		}
 		i++;
-		max += quart;
-		min += quart;
+		max = getBiggest(*la);
+		min += middle;
 		push_lista(la, lb);
 	}
 	sortLista(la, lb);
@@ -94,28 +94,24 @@ void	sort_100(t_list **la, t_list **lb)
 
 void	sort_500(t_list **la, t_list **lb)
 {
-	int	quart;
+	int	middle;
 	int	min;
 	int	max;
 	int	i;
 
 	min = getSmallest(*la);
-	quart = median_finding(*la) / 4;
-	max = min + quart;
+	middle = median_finding(*la) / 8;
+	max = min + middle;
 	i = 1;
-	while (i <= 4)
+	while (i <= 8)
 	{
 		while (getPosFirst(*la, min, max) != -1)
-		{
-			while (getAt(*la, 0) != getAt(*la, getPosFirst(*la, min, max)))
-				parsing("rra", la, lb);
-			if (lenList(*lb) > 1)
-				sortListb(la, lb);
-			parsing("pb", la, lb);
-		}
+			rotate_pushb(la, lb, min, max);
 		i++;
-		max += quart;
-		min += quart;
+		max += middle;
+		if (i == 8)
+			max = getBiggest(*la);
+		min += middle;
 		push_lista(la, lb);
 	}
 	sortLista(la, lb);
@@ -133,8 +129,10 @@ void	algo(t_list **lista, t_list **listb)
 		sort_100(lista, listb);
 	else if (lenList(*lista) <= 500 && lenList(*lista) > 100)
 		sort_500(lista, listb);
-	if (ft_verif(*lista) && lenList(*listb) == 0)
-		ft_putstr("OK\n");
 	else
-		ft_putstr("KO\n");
+		printf("Error\nToo many number injected");
+	if (ft_verif(*lista) && lenList(*listb) == 0)
+		printf("OK\n");
+	else
+		printf("KO\n");
 }

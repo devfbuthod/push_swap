@@ -25,9 +25,9 @@ int	main(int argc, char **argv)
 		return (0);
 	parsing(&lista, &listb);
 	if (ft_verif(lista) && lenList(listb) == 0)
-		ft_putstr("OK\n");
+		printf("OK\n");
 	else
-		ft_putstr("KO\n");
+		printf("KO\n");
 	freeList(lista);
 	freeList(listb);
 	lista = NULL;

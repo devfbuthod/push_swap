@@ -23,7 +23,7 @@ int	main(int argc, char **argv)
 	listb = NULL;
 	if (lista == NULL)
 		return (0);
-	else if (lenList(lista) == 1)
+	else if (lenList(lista) == 1 || ft_verif(lista))
 	{
 		printf("OK\n");
 		return (0);

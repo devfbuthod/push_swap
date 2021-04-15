@@ -68,7 +68,7 @@ int	printList(t_list *list)
 		return (-1);
 	while (list)
 	{
-		ft_printf("%d \n", (int)(list->data));
+		printf("%d \n", (int)(list->data));
 		list = list->next;
 		i++;
 	}
