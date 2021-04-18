@@ -65,10 +65,10 @@ void	sort_100(t_list **la, t_list **lb)
 	int	i;
 
 	min = getSmallest(*la);
-	middle = median_finding(*la) / 2;
+	middle = median_finding(*la) / 4;
 	max = min + middle;
 	i = 1;
-	while (i <= 2)
+	while (i <= 4)
 	{
 		while (getPosFirst(*la, min, max) != -1)
 		{
@@ -79,7 +79,9 @@ void	sort_100(t_list **la, t_list **lb)
 			parsing("pb", la, lb);
 		}
 		i++;
-		max = getBiggest(*la);
+		max += middle;
+		if (i == 4)
+			max = getBiggest(*la);
 		min += middle;
 		push_lista(la, lb);
 	}
@@ -94,16 +96,16 @@ void	sort_500(t_list **la, t_list **lb)
 	int	i;
 
 	min = getSmallest(*la);
-	middle = median_finding(*la) / 8;
+	middle = median_finding(*la) / 9;
 	max = min + middle;
 	i = 1;
-	while (i <= 8)
+	while (i <= 9)
 	{
 		while (getPosFirst(*la, min, max) != -1)
 			rotate_pushb(la, lb, min, max);
 		i++;
 		max += middle;
-		if (i == 8)
+		if (i == 9)
 			max = getBiggest(*la);
 		min += middle;
 		push_lista(la, lb);
@@ -125,8 +127,4 @@ void	algo(t_list **lista, t_list **listb)
 		sort_500(lista, listb);
 	else
 		printf("Error\nToo many number injected");
-	if (ft_verif(*lista) && lenList(*listb) == 0)
-		printf("OK\n");
-	else
-		printf("KO\n");
 }
