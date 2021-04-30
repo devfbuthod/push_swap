@@ -10,75 +10,28 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-static size_t	ft_strlen(char *s)
+char	*ft_strjoin_gnl(char *s1, char *s2, int f)
 {
-	size_t	i;
+	char	*res;
+	int		i;
+	int		j;
 
-	i = 0;
-	if (!s)
-		return (i);
-	while (s[i])
-		i++;
-	return (i);
-}
-
-char	*ft_strdup(char *s)
-{
-	char	*str;
-	size_t	i;
-
-	if (!s)
+	if (!s1 || !s2)
 		return (NULL);
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (str == NULL)
+	i = -1;
+	j = -1;
+	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!res)
 		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*str;
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	if (s1 == NULL)
-		return (ft_strdup(s2));
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (str == NULL)
-		return (NULL);
-	while (s1[j])
-		str[i++] = s1[j++];
-	j = 0;
-	while (s2[j])
-		str[i++] = s2[j++];
-	str[i] = '\0';
-	free(s1);
-	return (str);
-}
-
-int	find_eol(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (s == NULL)
-		return (-1);
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			return (i);
-		i++;
-	}
-	return (-1);
+	while (s1[++j])
+		res[++i] = s1[j];
+	j = -1;
+	while (s2[++j])
+		res[++i] = s2[j];
+	res[i + 1] = '\0';
+	if (f)
+		free(s1);
+	return (res);
 }

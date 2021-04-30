@@ -21,8 +21,5 @@
 # include <stdlib.h>
 
 int				get_next_line(int fd, char **line);
-int				find_eol(char *s);
-char			*ft_strdup(char *s);
-char			*ft_strjoin(char *s1, char *s2);
 
 #endif

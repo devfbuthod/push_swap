@@ -25,10 +25,17 @@ int	main(int argc, char **argv)
 		return (0);
 	else if (lenList(lista) == 1 || ft_verif(lista))
 	{
-		printf("OK\n");
+		freeList(lista);
 		return (0);
 	}
 	algo(&lista, &listb);
+	if (ft_verif(lista) && lenList(listb) == 0)
+		printf("OK\n");
+	else
+		printf("KO\n");
+	/*printList(lista);
+	printf("-------------------\n");
+	printList(listb);*/
 	freeList(lista);
 	freeList(listb);
 	lista = NULL;

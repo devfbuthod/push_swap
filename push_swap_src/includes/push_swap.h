@@ -98,4 +98,6 @@ void		rotate_pushb(t_list **la, t_list **lb, int min, int max);
 
 void		sortLista5(t_list **la, t_list **lb);
 
+int			getPosBetween(t_list *la, int value);
+
 #endif

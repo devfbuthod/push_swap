@@ -61,27 +61,23 @@ void	sort_100(t_list **la, t_list **lb)
 {
 	int	middle;
 	int	min;
-	int	max;
 	int	i;
 
 	min = getSmallest(*la);
 	middle = median_finding(*la) / 4;
-	max = min + middle;
 	i = 1;
 	while (i <= 4)
 	{
-		while (getPosFirst(*la, min, max) != -1)
+		while (getPosFirst(*la, min, min + middle) != -1)
 		{
-			while (getAt(*la, 0) != getAt(*la, getPosFirst(*la, min, max)))
+			while (getAt(*la, 0) != getAt(*la,
+					getPosFirst(*la, min, min + middle)))
 				parsing("rra", la, lb);
 			if (lenList(*lb) > 1)
 				sortListb(la, lb);
 			parsing("pb", la, lb);
 		}
 		i++;
-		max += middle;
-		if (i == 4)
-			max = getBiggest(*la);
 		min += middle;
 		push_lista(la, lb);
 	}
@@ -92,23 +88,29 @@ void	sort_500(t_list **la, t_list **lb)
 {
 	int	middle;
 	int	min;
-	int	max;
 	int	i;
+	int save;
 
+	save = -1;
 	min = getSmallest(*la);
-	middle = median_finding(*la) / 9;
-	max = min + middle;
+	middle = median_finding(*la) / 8;
 	i = 1;
-	while (i <= 9)
+	while (i <= 8)
 	{
-		while (getPosFirst(*la, min, max) != -1)
-			rotate_pushb(la, lb, min, max);
+		while (getPosFirst(*la, min, min + middle) != -1)
+		{
+			//printf("pos_first : %d\n", getPosFirst(*la, min, min + middle));
+			while (getAt(*la, 0) != getAt(*la,
+					getPosFirst(*la, min, min + middle)))
+				parsing("rra", la, lb);
+			if (lenList(*lb) > 1)
+				sortListb(la, lb);
+			parsing("pb", la, lb);
+		}
 		i++;
-		max += middle;
-		if (i == 9)
-			max = getBiggest(*la);
 		min += middle;
 		push_lista(la, lb);
+		save = getAt(*la, 0);
 	}
 	sortLista(la, lb);
 }

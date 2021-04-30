@@ -10,52 +10,100 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
-static int	update(char **line, char **buffer)
+int	ft_create_and_save(char **save, char **line, int size)
 {
-	int		eol;
-	char	*temp;
-
-	eol = find_eol(*buffer);
-	if (eol == -1)
+	*line = ft_create_line(*save);
+	*save = ft_get_after_eol(*save);
+	if (size <= 0)
 	{
-		if (*buffer != NULL)
-			*line = ft_strdup(*buffer);
-		else
-			*line = ft_strdup("");
-		free(*buffer);
-		*buffer = NULL;
+		free(*save);
 		return (0);
 	}
-	(*buffer)[eol] = '\0';
-	*line = ft_strdup(*buffer);
-	temp = *buffer;
-	*buffer = ft_strdup(&(*buffer)[eol + 1]);
-	free(temp);
-	temp = NULL;
 	return (1);
+}
+
+int	ft_contains_eol(char *str)
+{
+	int	i;
+
+	i = -1;
+	if (!str)
+		return (0);
+	while (str[++i])
+		if (str[i] == '\n')
+			return (1);
+	return (0);
+}
+
+char	*ft_create_line(char *s)
+{
+	int		i;
+	char	*str;
+
+	i = -1;
+	while (s[++i] && s[i] != '\n')
+		;
+	str = malloc(sizeof(char) * (i + 1));
+	if (!str)
+		return (NULL);
+	i = -1;
+	while (s[++i] && s[i] != '\n')
+		str[i] = s[i];
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_get_after_eol(char *save)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	j = 0;
+	while (save[i] && save[i] != '\n')
+		i++;
+	if (!(save[i]))
+	{
+		free(save);
+		return (NULL);
+	}
+	str = malloc(sizeof(char) * (ft_strlen(save) - i + 1));
+	if (!str)
+	{
+		free(save);
+		return (NULL);
+	}
+	i++;
+	while (save[i])
+		str[j++] = save[i++];
+	str[j] = '\0';
+	free(save);
+	return (str);
 }
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*buffer;
-	char		*reader;
-	int			eoread;
+	char				buf[BUFFER_SIZE + 1];
+	static char			*save[4096];
+	int					size;
 
-	reader = NULL;
-	if (!line || fd < 0 || BUFFER_SIZE <= 0
-		|| ((reader = malloc(sizeof(char) * (BUFFER_SIZE + 1))) == NULL))
+	if (!line || fd < 0 || BUFFER_SIZE <= 0)
 		return (-1);
-	while (find_eol(buffer) == -1
-		&& (eoread = read(fd, reader, BUFFER_SIZE)) > 0)
+	size = 1;
+	if (!save[fd])
+		save[fd] = ft_strdup("");
+	while (!(ft_contains_eol(save[fd])))
 	{
-		reader[eoread] = '\0';
-		buffer = ft_strjoin(buffer, reader);
+		size = read(fd, buf, BUFFER_SIZE);
+		if (size == -1)
+			return (-1);
+		else if (size == 0)
+			break ;
+		buf[size] = '\0';
+		save[fd] = ft_strjoin_gnl(save[fd], buf, 1);
 	}
-	free(reader);
-	reader = NULL;
-	if (eoread == -1)
-		return (-1);
-	return (update(line, &buffer));
+	return (ft_create_and_save(&save[fd], line, size));
 }

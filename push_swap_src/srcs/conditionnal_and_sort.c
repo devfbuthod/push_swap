@@ -47,9 +47,10 @@ void	isBetween(t_list **la, t_list **lb)
 	int	pos_first;
 	int	pos_second;
 
-	pos_first = getPos(*lb, getAt(*la, 0));
+	pos_first = getPosBetween(*lb, getAt(*la, 0));
 	pos_second = lenList(*lb) - pos_first;
-	if (pos_first >= pos_second && pos_first != 0)
+	//printf("pos_first : %d, pos_second : %d, total : %d\n", pos_first, pos_second, lenList(*lb));
+	if (pos_first >= pos_second)
 		while (!(getAt(*la, 0) < getAt(*lb, lenList(*lb) - 1)
 				&& getAt(*la, 0) > getAt(*lb, 0)))
 			parsing("rrb", la, lb);
@@ -78,8 +79,8 @@ void	sortLista(t_list **la, t_list **lb)
 	pos_second = lenList(*la) - pos_first;
 	if (pos_first >= pos_second && pos_first != 0)
 		while (getAt(*la, 0) != getSmallest(*la))
-			parsing("ra", la, lb);
+			parsing("rra", la, lb);
 	else
 		while (getAt(*la, 0) != getSmallest(*la))
-			parsing("rra", la, lb);
+			parsing("ra", la, lb);
 }

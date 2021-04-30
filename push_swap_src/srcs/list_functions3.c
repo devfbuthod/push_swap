@@ -74,10 +74,31 @@ int	getPos(t_list *la, int value)
 	int	i;
 
 	i = 0;
-	while (!(value < getAt(la, lenList(la) - 1) && value > getAt(la, 0)) && la)
+	while (la && value != la->data)
 	{
 		i++;
 		la = la->next;
+	}
+	return (i);
+}
+
+int getPosBetween(t_list *la, int value)
+{
+	int i;
+
+	i = 0;
+	
+	if (value < getAt(la, lenList(la) - 1) && value > getAt(la, 0))
+		i = 1;
+	else if (value < getAt(la, 0) && value > getAt(la, lenList(la) - 1))
+		i = lenList(la) - 1;
+	else
+	{
+		while (la && !(value < getAt(la, 0) && value > getAt(la, 1)))
+		{
+			i++;
+			la = la->next;
+		}
 	}
 	return (i);
 }

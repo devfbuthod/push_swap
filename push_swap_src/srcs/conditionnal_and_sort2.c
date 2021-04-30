@@ -27,6 +27,20 @@ void	push_lista(t_list **la, t_list **lb)
 		while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb)
 			&& lenList(*lb) > 1)
 			parsing("rb", la, lb);
+	/*if (getAt(*lb, 0) > getSmallest(*la) && getAt(*lb, 0) < getBiggest(*la))
+	{
+		pos_first = getPosEndList(*la, getAt(*lb, 0));
+		pos_second = lenList(*la) - pos_first;
+		//printf("pos_first : %d, pos_second : %d\n", pos_first, pos_second);
+		if (pos_first >= pos_second && pos_first != 0)
+			while (!(getAt(*lb, 0) < getAt(*la, lenList(*la) - 1)
+				&& getAt(*lb, 0) > getAt(*la, 0)))
+			parsing("ra", la, lb);
+		else
+			while (!(getAt(*lb, 0) < getAt(*la, lenList(*la) - 1)
+				&& getAt(*lb, 0) > getAt(*la, 0)))
+			parsing("rra", la, lb);
+	}*/
 	while (*lb)
 		parsing("pa", la, lb);
 }

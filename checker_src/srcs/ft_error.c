@@ -46,6 +46,8 @@ int	ft_error_parser(char *argv, t_list *list)
 	int	i;
 
 	i = 0;
+	if (ft_strlen(argv) == 1 && (argv[0] == '-' || argv[0] == '+'))
+		return (ft_error(list, 1));
 	if (ft_strlen(argv) >= 12)
 		return (ft_error(list, 3));
 	if ((ft_atoi(argv) >= 2147483648) || ((ft_atoi(argv) <= -2147483649)))

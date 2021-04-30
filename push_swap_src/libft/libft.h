@@ -12,7 +12,11 @@
 
 #ifndef LIBFT_H
 # define LIBFT_H
-
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 4
+# endif
+# include <fcntl.h>
+# include <unistd.h>
 # include <stddef.h>
 # include <stdlib.h>
 
@@ -73,5 +77,11 @@ void			ft_lstclear(t_liblist **lst, void (*del)(void*));
 void			ft_lstiter(t_liblist *lst, void (*f)(void*));
 int				ft_allisdigit(char *str);
 int				ft_strcmp(char *s1, char *s2);
+int				get_next_line(int fd, char **line);
+char			*ft_strjoin_gnl(char *s1, char *s2, int f);
+int				ft_create_and_save(char **save, char **line, int size);
+int				ft_contains_eol(char *str);
+char			*ft_create_line(char *s);
+char			*ft_get_after_eol(char *save);
 
 #endif
