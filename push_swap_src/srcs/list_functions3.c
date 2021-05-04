@@ -53,7 +53,7 @@ int	getPosFirst(t_list *la, int min, int max)
 int	getPosSecond(t_list *la, int min, int max)
 {
 	int	i;
-	int	temp;
+	int temp;
 
 	i = 0;
 	temp = 0;
@@ -65,7 +65,7 @@ int	getPosSecond(t_list *la, int min, int max)
 		i++;
 	}
 	if (temp != 0)
-		return (100 - temp);
+		return (i - temp);
 	return (-1);
 }
 

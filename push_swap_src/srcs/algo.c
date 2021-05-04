@@ -59,12 +59,14 @@ void	sort_5(t_list **la, t_list **lb)
 
 void	sort_100(t_list **la, t_list **lb)
 {
+	int save;
 	int	middle;
 	int	min;
 	int	i;
 
 	min = getSmallest(*la);
 	middle = median_finding(*la) / 4;
+	save = -1;
 	i = 1;
 	while (i <= 4)
 	{
@@ -79,38 +81,42 @@ void	sort_100(t_list **la, t_list **lb)
 		}
 		i++;
 		min += middle;
-		push_lista(la, lb);
+		push_lista(la, lb, &save);
 	}
 	sortLista(la, lb);
 }
 
 void	sort_500(t_list **la, t_list **lb)
 {
-	int	middle;
-	int	min;
-	int	i;
+	(void)lb;
+	int pos_first;
+	int pos_second;
 	int save;
+	int tab[12];
+	int	i;
 
+	getChunks(la, tab);
 	save = -1;
-	min = getSmallest(*la);
-	middle = median_finding(*la) / 8;
-	i = 1;
-	while (i <= 8)
+	i = 0;
+	while (i <= 11)
 	{
-		while (getPosFirst(*la, min, min + middle) != -1)
+		while (getPosFirst(*la, tab[i], tab[i + 1]) != -1)
 		{
-			//printf("pos_first : %d\n", getPosFirst(*la, min, min + middle));
-			while (getAt(*la, 0) != getAt(*la,
-					getPosFirst(*la, min, min + middle)))
-				parsing("rra", la, lb);
+			pos_first = getPosFirst(*la, tab[i], tab[i + 1]);
+			pos_second = getPosSecond(*la, tab[i], tab[i + 1]);
+			if (pos_first >= pos_second)
+				while (getPosFirst(*la, tab[i], tab[i + 1]) != 0)
+					parsing("rra", la, lb);
+			else
+				while (getPosFirst(*la, tab[i], tab[i + 1]) != 0)
+					parsing("ra", la, lb);
 			if (lenList(*lb) > 1)
 				sortListb(la, lb);
 			parsing("pb", la, lb);
 		}
 		i++;
-		min += middle;
-		push_lista(la, lb);
-		save = getAt(*la, 0);
+		tab[i] = tab[i] + 1;
+		push_lista(la, lb, &save);
 	}
 	sortLista(la, lb);
 }

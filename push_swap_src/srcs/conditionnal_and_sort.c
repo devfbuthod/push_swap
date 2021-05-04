@@ -49,7 +49,6 @@ void	isBetween(t_list **la, t_list **lb)
 
 	pos_first = getPosBetween(*lb, getAt(*la, 0));
 	pos_second = lenList(*lb) - pos_first;
-	//printf("pos_first : %d, pos_second : %d, total : %d\n", pos_first, pos_second, lenList(*lb));
 	if (pos_first >= pos_second)
 		while (!(getAt(*la, 0) < getAt(*lb, lenList(*lb) - 1)
 				&& getAt(*la, 0) > getAt(*lb, 0)))

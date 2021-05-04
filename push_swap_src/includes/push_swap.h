@@ -86,7 +86,7 @@ void		isBetween(t_list **la, t_list **lb);
 
 void		sortListb(t_list **la, t_list **lb);
 
-void		push_lista(t_list **la, t_list **lb);
+void		push_lista(t_list **la, t_list **lb, int *save);
 
 void		push_listb(t_list **la, t_list **lb, int max);
 
@@ -94,10 +94,10 @@ void		sortLista(t_list **la, t_list **lb);
 
 void		sort(t_list **la, t_list **listb);
 
-void		rotate_pushb(t_list **la, t_list **lb, int min, int max);
-
 void		sortLista5(t_list **la, t_list **lb);
 
 int			getPosBetween(t_list *la, int value);
+
+void		getChunks(t_list **la, int *tab);
 
 #endif

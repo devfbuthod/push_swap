@@ -12,35 +12,33 @@
 
 #include "push_swap.h"
 
-void	push_lista(t_list **la, t_list **lb)
+void	push_lista(t_list **la, t_list **lb, int *save)
 {
 	int	pos_first;
 	int	pos_second;
 
-	pos_first = getPos(*lb, getSmallest(*lb));
+	pos_first = getPos(*lb, getBiggest(*lb));
 	pos_second = lenList(*lb) - pos_first;
 	if (pos_first >= pos_second && pos_first != 0)
-		while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb)
+		while (getAt(*lb, 0) != getBiggest(*lb)
 			&& lenList(*lb) > 1)
 			parsing("rrb", la, lb);
 	else
-		while (getAt(*lb, lenList(*lb) - 1) != getSmallest(*lb)
+		while (getAt(*lb, 0) != getBiggest(*lb)
 			&& lenList(*lb) > 1)
 			parsing("rb", la, lb);
-	/*if (getAt(*lb, 0) > getSmallest(*la) && getAt(*lb, 0) < getBiggest(*la))
+	if (*save != -1)
 	{
-		pos_first = getPosEndList(*la, getAt(*lb, 0));
+		pos_first = getPos(*la, *save);
 		pos_second = lenList(*la) - pos_first;
-		//printf("pos_first : %d, pos_second : %d\n", pos_first, pos_second);
-		if (pos_first >= pos_second && pos_first != 0)
-			while (!(getAt(*lb, 0) < getAt(*la, lenList(*la) - 1)
-				&& getAt(*lb, 0) > getAt(*la, 0)))
-			parsing("ra", la, lb);
+		if (pos_first >= pos_second)
+			while (getAt(*la, lenList(*la) - 1) != *save)
+				parsing("rra", la, lb);
 		else
-			while (!(getAt(*lb, 0) < getAt(*la, lenList(*la) - 1)
-				&& getAt(*lb, 0) > getAt(*la, 0)))
-			parsing("rra", la, lb);
-	}*/
+			while (getAt(*la, lenList(*la) - 1) != *save)
+				parsing("ra", la, lb);
+	}
+	*save = getBiggest(*lb);
 	while (*lb)
 		parsing("pa", la, lb);
 }
@@ -64,15 +62,6 @@ long long	median_finding(t_list *la)
 	return (res);
 }
 
-void	rotate_pushb(t_list **la, t_list **lb, int min, int max)
-{
-	while (getAt(*la, 0) != getAt(*la, getPosFirst(*la, min, max)))
-		parsing("rra", la, lb);
-	if (lenList(*lb) > 1)
-		sortListb(la, lb);
-	parsing("pb", la, lb);
-}
-
 void	sortLista5(t_list **la, t_list **lb)
 {
 	int	pos_first;
@@ -86,4 +75,65 @@ void	sortLista5(t_list **la, t_list **lb)
 	else
 		while (getAt(*la, 0) != getSmallest(*la))
 			parsing("ra", la, lb);
+}
+
+void sort_list(t_list *la, int *tab)
+{
+    int len;
+    int i;
+    int j;
+    int temp;
+
+    i = 0;
+    j = 0;
+    temp = 0;
+    len = lenList(la);
+    while (la)
+    {
+        tab[i] = la->data;
+        la = la->next;
+        i++;
+    }
+    i = 0;
+    while (i < len)
+    {
+        while (j < len - 1)
+        {
+            if (tab[j] > tab[j + 1])
+            {
+                temp = tab[j + 1];
+                tab[j + 1] = tab[j];
+                tab[j] = temp;
+            }
+            j++;
+        }
+        j = 0;
+        i++;
+    }
+}
+
+void	getChunks(t_list **la, int *tab2)
+{
+	int	tab[lenList(*la)];
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	sort_list(*la, tab);
+	tab2[j] = getSmallest(*la);
+	j++;
+	while (i < lenList(*la))
+	{
+		while (i < lenList(*la) * j / 11)
+			i++;
+		if (j == 11)
+		{
+			tab2[j] = getBiggest(*la);
+			tab2[j + 1] = 0;
+			break;
+		}
+		tab2[j] = tab[i];
+		j++;
+	}
 }
